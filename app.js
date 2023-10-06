@@ -23,6 +23,7 @@ const emailInput = document.querySelector('#email')
 formulario.addEventListener('submit', validarFormulario)
 
 function validarFormulario(e) {
+    // Evitamos que se ejecute de forma automática, solamente cuando pulsemos el botón.
     e.preventDefault()
 
     if([usuarioInput.value, contrasenaInput.value, emailInput.value].includes('')) {
