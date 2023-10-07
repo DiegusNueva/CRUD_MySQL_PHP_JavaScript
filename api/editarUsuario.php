@@ -1,7 +1,7 @@
 <?php
     
     // Variables de la conexion a la DB
-    $mysqli = new mysqli("localhost","root","","pruebas");
+    $mysqli = new mysqli("localhost","root","root","pruebas");
     
     // Comprobamos la conexion
     if($mysqli->connect_errno) {
