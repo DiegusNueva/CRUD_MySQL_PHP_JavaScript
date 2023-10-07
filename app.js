@@ -26,6 +26,7 @@ function validarFormulario(e) {
     // Evitamos que se ejecute de forma automática, solamente cuando pulsemos el botón.
     e.preventDefault()
 
+    // Primera validación
     if([usuarioInput.value, contrasenaInput.value, emailInput.value].includes('')) {
         alert('Todos los campos son obligatorios')
         return
