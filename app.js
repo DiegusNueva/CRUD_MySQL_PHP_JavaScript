@@ -1,7 +1,7 @@
-const urlObtenerUsuarios = 'http://127.0.0.1:5500/api/obtenerUsuarios.php'
-const urlAgregarUsuario = 'http://127.0.0.1:5500/api/agregarUsuario.php'
-const urlEditarUsuario = 'http://127.0.0.1:5500/api/editarUsuario.php'
-const urlBorrarUsuario = 'http://127.0.0.1:5500/api/borrarUsuario.php'
+const urlObtenerUsuarios = 'http://127.0.0.1/api/obtenerUsuarios.php'
+const urlAgregarUsuario = 'http://127.0.0.1/api/agregarUsuario.php'
+const urlEditarUsuario = 'http://127.0.0.1/api/editarUsuario.php'
+const urlBorrarUsuario = 'http://127.0.0.1/api/borrarUsuario.php'
 
 let listaEmpleados = []
 
