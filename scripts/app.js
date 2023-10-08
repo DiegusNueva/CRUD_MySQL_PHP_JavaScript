@@ -1,11 +1,13 @@
-// EndPoints que se comunican mediante una API de tipo REST con el BACKEND
+// Definición de las URL de los EndPoints de la API REST
 const urlObtenerUsuarios = 'http://35.180.140.63/api/obtenerUsuarios.php'
 const urlAgregarUsuario = 'http://35.180.140.63/api/agregarUsuario.php'
 const urlEditarUsuario = 'http://35.180.140.63/api/editarUsuario.php'
 const urlBorrarUsuario = 'http://35.180.140.63/api/borrarUsuario.php'
 
+// Declaración de una lista de empleados vacía
 let listaEmpleados = []
 
+// Objeto empleado que se utiliza para almacenar información de empleados
 const objEmpleado = {
     idUsuario: '',
     usuario: '',
@@ -13,21 +15,21 @@ const objEmpleado = {
     email: ''
 }
 
+// Variable para rastrear si se está editando un empleado
 let editando = false
 
+// Obtener referencias a elementos HTML del formulario y agregar un evento para validar el formulario
 const formulario = document.querySelector('#formulario')
-
 const usuarioInput = document.querySelector('#usuario')
 const contrasenaInput = document.querySelector('#contrasena')
 const emailInput = document.querySelector('#email')
-
 formulario.addEventListener('submit', validarFormulario)
 
+// Función para validar el formulario cuando se envía
 function validarFormulario(e) {
-    // Evitamos que se ejecute de forma automática, solamente cuando pulsemos el botón.
-    e.preventDefault()
+    e.preventDefault() // Evita que el formulario se envíe automáticamente al presionar el botón.
 
-    // Primera validación
+    // Primera validación: Comprobar si los campos obligatorios están vacíos
     if([usuarioInput.value, contrasenaInput.value, emailInput.value].includes('')) {
         alert('Todos los campos son obligatorios')
         return
@@ -37,6 +39,7 @@ function validarFormulario(e) {
         editarEmpleado()
         editando = false
     } else {
+        // Asignar valores del formulario al objeto empleado
         objEmpleado.idUsuario = Date.now()
         objEmpleado.usuario = usuarioInput.value
         objEmpleado.contrasena = contrasenaInput.value
@@ -46,20 +49,21 @@ function validarFormulario(e) {
     }
 }
 
+// Función asíncrona para obtener la lista de empleados
 async function obtenerEmpleados() {
-
     listaEmpleados = await fetch(urlObtenerUsuarios)
-    .then(respuesta => respuesta.json())
-    .then(datos => datos)
-    .catch(error => console.log(error))
+        .then(respuesta => respuesta.json())
+        .then(datos => datos)
+        .catch(error => console.log(error))
 
     mostrarEmpleados()
-
 }
+
+// Llamar a la función obtenerEmpleados para cargar la lista de empleados al cargar la página
 obtenerEmpleados()
 
+// Función para mostrar la lista de empleados en la interfaz
 function mostrarEmpleados() {
-
     const divEmpleados = document.querySelector('.div-empleados')
 
     listaEmpleados.forEach(empleado => {
@@ -85,46 +89,41 @@ function mostrarEmpleados() {
 
         divEmpleados.appendChild(parrafo)
         divEmpleados.appendChild(hr)
-
     })
-
 }
 
+// Función asíncrona para agregar un empleado
 async function agregarEmpleado() {
-
-    const res = await fetch(urlAgregarUsuario,
-        {
-            method: 'POST',
-            body: JSON.stringify(objEmpleado)
-        })
-        .then(respuesta => respuesta.json())
-        .then(data => data)
-        .catch(error => alert(error))
+    const res = await fetch(urlAgregarUsuario, {
+        method: 'POST',
+        body: JSON.stringify(objEmpleado)
+    })
+    .then(respuesta => respuesta.json())
+    .then(data => data)
+    .catch(error => alert(error))
 
     if(res.msg === 'OK') {
-        alert('Se registro exitosamente')
+        alert('Se registró exitosamente')
         limpiarHTML()
         obtenerEmpleados()
-
         formulario.reset()
         limpiarObjeto()
     }
 }
 
+// Función asíncrona para editar un empleado
 async function editarEmpleado() {
-    
     objEmpleado.usuario = usuarioInput.value
     objEmpleado.contrasena = contrasenaInput.value
     objEmpleado.email = emailInput.value
 
-    const res = await fetch(urlEditarUsuario,
-        {
-            method: 'POST',
-            body: JSON.stringify(objEmpleado)
-        })
-        .then(respuesta => respuesta.json())
-        .then(data => data)
-        .catch(error => alert(error))
+    const res = await fetch(urlEditarUsuario, {
+        method: 'POST',
+        body: JSON.stringify(objEmpleado)
+    })
+    .then(respuesta => respuesta.json())
+    .then(data => data)
+    .catch(error => alert(error))
 
     if(res.msg === 'OK')  {
         alert('Se actualizó correctamente')
@@ -132,37 +131,34 @@ async function editarEmpleado() {
         limpiarHTML()
         obtenerEmpleados()
         formulario.reset()
-
         limpiarObjeto()
     }
 
     formulario.querySelector('button[type="submit"]').textContent = 'Agregar';
 
     editando = false
-
 }
 
+// Función asíncrona para eliminar un empleado
 async function eliminarEmpleado(id) {
-
-    const res = await fetch(urlBorrarUsuario,
-        {
-            method: 'POST',
-            body: JSON.stringify({'idUsuario': id})
-        })
-        .then(respuesta => respuesta.json())
-        .then(data => data)
-        .catch(error => alert(error))
+    const res = await fetch(urlBorrarUsuario, {
+        method: 'POST',
+        body: JSON.stringify({'idUsuario': id})
+    })
+    .then(respuesta => respuesta.json())
+    .then(data => data)
+    .catch(error => alert(error))
 	
-        if(res.msg === 'OK') {
-            alert('Se borró exitosamente')
+    if(res.msg === 'OK') {
+        alert('Se borró exitosamente')
 
-            limpiarHTML()
-            obtenerEmpleados()
-            limpiarObjeto()
-        }
-
+        limpiarHTML()
+        obtenerEmpleados()
+        limpiarObjeto()
+    }
 }
 
+// Función para cargar los datos de un empleado en el formulario para su edición
 function cargarEmpleado(empleado) {
     const {idUsuario, usuario, contrasena, email} = empleado
 
@@ -176,6 +172,7 @@ function cargarEmpleado(empleado) {
     editando = true
 }
 
+// Función para limpiar el contenido HTML de la lista de empleados
 function limpiarHTML() {
     const divEmpleados = document.querySelector('.div-empleados');
     while(divEmpleados.firstChild) {
@@ -183,6 +180,7 @@ function limpiarHTML() {
     }
 }
 
+// Función para limpiar el objeto empleado
 function limpiarObjeto() {
     objEmpleado.idUsuario = ''
     objEmpleado.usuario = ''
