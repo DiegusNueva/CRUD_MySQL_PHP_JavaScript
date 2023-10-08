@@ -1,7 +1,8 @@
-const urlObtenerUsuarios = 'http://127.0.0.1/api/obtenerUsuarios.php'
-const urlAgregarUsuario = 'http://127.0.0.1/api/agregarUsuario.php'
-const urlEditarUsuario = 'http://127.0.0.1/api/editarUsuario.php'
-const urlBorrarUsuario = 'http://127.0.0.1/api/borrarUsuario.php'
+// EndPoints que se comunican mediante una API de tipo REST con el BACKEND
+const urlObtenerUsuarios = 'http://35.180.140.63/api/obtenerUsuarios.php'
+const urlAgregarUsuario = 'http://35.180.140.63/api/agregarUsuario.php'
+const urlEditarUsuario = 'http://35.180.140.63/api/editarUsuario.php'
+const urlBorrarUsuario = 'http://35.180.140.63/api/borrarUsuario.php'
 
 let listaEmpleados = []
 
@@ -125,7 +126,6 @@ async function editarEmpleado() {
         .then(data => data)
         .catch(error => alert(error))
 
-    console.log(res)
     if(res.msg === 'OK')  {
         alert('Se actualizó correctamente')
 
@@ -152,7 +152,7 @@ async function eliminarEmpleado(id) {
         .then(respuesta => respuesta.json())
         .then(data => data)
         .catch(error => alert(error))
-
+	
         if(res.msg === 'OK') {
             alert('Se borró exitosamente')
 
