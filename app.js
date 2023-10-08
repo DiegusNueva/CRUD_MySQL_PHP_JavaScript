@@ -1,7 +1,7 @@
-const urlObtenerUsuarios = 'http://localhost/CRUD_MySQL_PHP_JavaScript/api/obtenerUsuarios.php'
-const urlAgregarUsuario = 'http://localhost/CRUD_MySQL_PHP_JavaScript/api/agregarUsuario.php'
-const urlEditarUsuario = 'http://localhost/CRUD_MySQL_PHP_JavaScript/api/editarUsuario.php'
-const urlBorrarUsuario = 'http://localhost/CRUD_MySQL_PHP_JavaScript/api/borrarUsuario.php'
+const urlObtenerUsuarios = 'http://127.0.0.1:5500/api/obtenerUsuarios.php'
+const urlAgregarUsuario = 'http://127.0.0.1:5500/api/agregarUsuario.php'
+const urlEditarUsuario = 'http://127.0.0.1:5500/api/editarUsuario.php'
+const urlBorrarUsuario = 'http://127.0.0.1:5500/api/borrarUsuario.php'
 
 let listaEmpleados = []
 
@@ -125,6 +125,7 @@ async function editarEmpleado() {
         .then(data => data)
         .catch(error => alert(error))
 
+    console.log(res)
     if(res.msg === 'OK')  {
         alert('Se actualizó correctamente')
 
