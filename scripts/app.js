@@ -26,7 +26,7 @@ const emailInput = document.querySelector('#email')
 formulario.addEventListener('submit', validarFormulario)
 
 // Función para validar el formulario cuando se envía
-function validarFormulario(e) {
+const validarFormulario = e => {
     e.preventDefault() // Evita que el formulario se envíe automáticamente al presionar el botón.
 
     // Primera validación: Comprobar si los campos obligatorios están vacíos
@@ -49,8 +49,8 @@ function validarFormulario(e) {
     }
 }
 
-// Función asíncrona para obtener la lista de empleados
-async function obtenerEmpleados() {
+// Función asíncrona para obtene = async r la lista de empleados
+const obtenerEmpleados = async () => {
     listaEmpleados = await fetch(urlObtenerUsuarios)
         .then(respuesta => respuesta.json())
         .then(datos => datos)
@@ -63,7 +63,7 @@ async function obtenerEmpleados() {
 obtenerEmpleados()
 
 // Función para mostrar la lista de empleados en la interfaz
-function mostrarEmpleados() {
+const mostrarEmpleados = () => {
     const divEmpleados = document.querySelector('.div-empleados')
 
     listaEmpleados.forEach(empleado => {
@@ -93,7 +93,7 @@ function mostrarEmpleados() {
 }
 
 // Función asíncrona para agregar un empleado
-async function agregarEmpleado() {
+const agregarEmpleado = async () => {
     const res = await fetch(urlAgregarUsuario, {
         method: 'POST',
         body: JSON.stringify(objEmpleado)
@@ -112,7 +112,7 @@ async function agregarEmpleado() {
 }
 
 // Función asíncrona para editar un empleado
-async function editarEmpleado() {
+const editarEmpleado = async () => {
     objEmpleado.usuario = usuarioInput.value
     objEmpleado.contrasena = contrasenaInput.value
     objEmpleado.email = emailInput.value
@@ -140,7 +140,7 @@ async function editarEmpleado() {
 }
 
 // Función asíncrona para eliminar un empleado
-async function eliminarEmpleado(id) {
+const eliminarEmpleado = async (id) => {
     const res = await fetch(urlBorrarUsuario, {
         method: 'POST',
         body: JSON.stringify({'idUsuario': id})
@@ -159,7 +159,7 @@ async function eliminarEmpleado(id) {
 }
 
 // Función para cargar los datos de un empleado en el formulario para su edición
-function cargarEmpleado(empleado) {
+const cargarEmpleado = empleado => {
     const {idUsuario, usuario, contrasena, email} = empleado
 
     usuarioInput.value = usuario
@@ -173,7 +173,7 @@ function cargarEmpleado(empleado) {
 }
 
 // Función para limpiar el contenido HTML de la lista de empleados
-function limpiarHTML() {
+const limpiarHTML = () => {
     const divEmpleados = document.querySelector('.div-empleados');
     while(divEmpleados.firstChild) {
         divEmpleados.removeChild(divEmpleados.firstChild)
@@ -181,7 +181,7 @@ function limpiarHTML() {
 }
 
 // Función para limpiar el objeto empleado
-function limpiarObjeto() {
+const limpiarObjeto = () => {
     objEmpleado.idUsuario = ''
     objEmpleado.usuario = ''
     objEmpleado.contrasena = ''
