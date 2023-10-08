@@ -1,3 +1,4 @@
+// EndPoints que se comunican mediante una API de tipo REST con el BACKEND
 const urlObtenerUsuarios = 'http://35.180.140.63/api/obtenerUsuarios.php'
 const urlAgregarUsuario = 'http://35.180.140.63/api/agregarUsuario.php'
 const urlEditarUsuario = 'http://35.180.140.63/api/editarUsuario.php'
