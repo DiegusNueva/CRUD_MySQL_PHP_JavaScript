@@ -153,7 +153,9 @@ async function eliminarEmpleado(id) {
         .catch(error => alert(error))
 	
 	console.log(res)
-        console.log(res.msg)
+    console.log(res.msg)
+    console.log(typeof(res))
+    console.log(typeof(res.msg))
 
         if(res.msg === 'OK') {
             alert('Se borró exitosamente')
